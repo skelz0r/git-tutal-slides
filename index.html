@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<title>Git-Tutal - Slides</title>
+
+		<meta charset="utf-8">
+		<link href="img/layout/favicon.png" rel="shortcut icon" type="image/vnd.microsoft.icon">
+		<meta name="description" content="Git Tutal Slides">
+		<meta name="author" content="Loïc Delmaire">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/blackbird.css" id="bbtheme">
+		<link rel="stylesheet" href="css/style.css" id="style">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+			<script src="js/html5shiv.js"></script>
+		<![endif]-->
+
+	</head>
+
+	<body>
+		<header id="top">
+			<div class="logo-wrapper">
+				<div class="wrapper">
+					<a href="http://www.blackbird.co"><img class="logo" alt="Blackbird" src="img/layout/logo.svg"></a>
+				</div>
+			</div>
+			<div id="nav">
+				<div class="nav-elt title" style="display: none;">
+					<img src="img/layout/quotes.png" alt="quotes" />
+					<span></span>
+				</div>
+				<div class="nav-elt subtitle" style="display: none;">
+					<img src="img/layout/tiny-quotes.png" alt="quotes" />
+					<span></span>
+				</div>
+			</div>
+		</header>
+
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>Git Tutal</h1>
+					<p>
+						<img src="img/git.png" alt="Git" class="rails" />
+						<br />
+						Slides disponibles ici : <a href="http://delmaire.iiens.net/git"/>http://delmaire.iiens.net/git</a>
+					</p>
+					<p>
+						<small>
+							De Loïc Delmaire alias Skelz0r<br />
+							<a href="https://twitter.com/loicdelmaire">@loicdelmaire</a> / <a href="mailto:loic@blackbird.co">loic@blackbird.co</a>
+						</small>
+					</p>
+				</section>
+
+				<section>
+					<h3>Objectifs (1/2)</h3>
+					<ul class="main">
+						<li>Avoir des backups</li>
+						<li>Avoir un contrôle total sur les sources de votre projet</li>
+						<li>Pouvoir travailler à plusieurs de manière efficace</li>
+						<li>Pondre des sites webs efficacement et rapidement </li>
+					</ul>
+				</section>
+				
+				<section>
+					<h3>Objectifs (2/2)</h3>
+					<p>
+						À la fin du cours, vous aurez codé un <strong>bot à plusieurs</strong> (aussi complet que le Balembot ! <img src="img/thumb-up.png" style="vertical-align: middle;" alt="Trop cool!" />)
+					</p>
+					<div class="container">
+						<div class="span6" style="margin-top: 50px;">
+							<img src="img/balembot.png" alt="PROBLEM?" style="max-width: 100%;"/>
+							<h5>Utile hein ? :]</h5>
+							<small>(© #balemboy)</small>
+						</div>
+						<div class="span6 fragment">
+							<img src="img/LOL.png" alt="OKI?" />
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h3>Petit interlude pour le projet</h3>
+					<p>
+						À chaque fois que vous verrez l'encadré suivant :
+						<div class="console medium">
+							echo "COUCOU JE SUIS UN ENCADRÉ"
+						</div>
+						Il faudra taper le contenu de l'encadré en console
+					</p>
+				</section>
+
+				<section>
+					<h3>Gagnons du temps</h3>
+
+					<div class="console medium">
+						ssh nom20XX@perso.iiens.net<br />
+						source /home/users/2010/delmaire2010/git-tutal-install.sh
+					</div>
+					<br />
+					<p>Cette ligne permet d'installer ruby sur votre perso<br /> et d'autres trucs intéressants ;)</p>
+				</section>
+
+				<section>
+					<h3>Plan du tutal</h3>
+					<ol class="main">
+						<li>Pourquoi Git ? <img src="img/scratch.jpg"  alt="Un pas!" style="width: 10%;" /></li>
+						<li>Vos premiers <img src="img/pas.png" style="vertical-align: -60%;"  alt="Un pas!" /> avec Git</li>
+						<li>Gestion des branches <img src="img/tree.png"  alt="Un arbre!" /></li>
+						<li>Gestion des remotes <img src="img/tiny-remote.png"  alt="Une télécommande!" /></li>
+						<li>Aller plus loiiiiiiiiiin <img src="img/music.png" style="vertical-align: -45%;"  alt="Une note!" /></li>
+					</ol>
+				</section>
+				
+				<section data-title="Pourquoi Git ?">
+					<h3>I. Pourquoi Git ?</h3>
+					<ol class="main">
+						<li>Pourquoi versionnes-t-on nos sources ?</li>
+						<li>Les différentes solutions</li>
+						<li>Et git dans tout ça ?</li>
+					</ol>
+				</section>
+
+				<section data-subtitle="Pourquoi versionne-t'on nos sources ?">
+					<h3>Pourquoi versionne-t'on nos sources : les problématiques à résoudre</h3>
+					<p>Comment en arrive-t'on à créer des outils de versionnement ?</p>
+					<ul>
+						<li class="fragment">Faire des backups régulièr(e)s</li>
+						<li class="fragment">Développer de nouvelles fonctionnalitées</li>
+						<li class="fragment">Faire contribuer d'autres personnes</li>
+					</ul>
+				</section>	
+				
+				<section data-subtitle="Les différentes solutions">
+					<h3>Les deux grandes familles de SCM (Source Code Management)</h3>
+					<ul>
+						<li><strong>Les SCM centralisés</strong><span class="fragment"> : toutes les sources sont centralisées sur un seul serveur, appelé dépôt.</span></li>
+						<li><strong>Les SCM distribués</strong><span class="fragment"> : chaque copie fait office de dépôt.</span></li>
+					</ul>
+				</section>
+
+				<section>
+					<div class="container">
+						<h3>Quelques logiciels connus</h3>
+						<div class="span3 fragment">
+							<img src="img/cvs.jpg" alt="CVS" />
+							<br />
+							<strong>CVS</strong> (1990)
+						</div>
+						<div class="span3 fragment" style="margin-top: 89px;">
+							<img src="img/svn.png" alt="Subversion" />
+							<br />
+							<strong>Subversion</strong> (2000)
+						</div>
+						<div class="span3 fragment" style="margin-top: 27px;">
+							<img src="img/mercurial.png" alt="Mercurial" />
+							<br />
+							<strong>Mercurial</strong> (2005)
+						</div>
+						<div class="span3 fragment" style="margin-top: 129px;">
+							<img src="img/bazaar.png" alt="Bazaar" />
+							<br />
+							<strong>Bazaar</strong> (2005)
+						</div>
+					</div>
+					<p>Une liste exhaustive <a href="http://en.wikipedia.org/wiki/List_of_revision_control_software">sur wikipedia</a></p>
+				</section>
+
+				<section data-subtitle="Et Git dans tout ça ?">
+					<h3>Et Git dans tout ça ?</h3>
+					<div class="container">
+						<div class="span8">
+							<ul>
+								<li class="fragment">Développé pour maintenir le noyau Linux (2005) : rapidité et robustesse</li>
+								<li class="fragment">Très efficace pour la gestion des branches</li>
+								<li class="fragment">Caractère distribué du logiciel</li>
+								<li class="fragment">Puissance des algorithmes et un bon gros tas (PHAT) de commandes utiles \o</li>
+						</div>
+						<div class="span4">
+							<img src="img/linus-torvald.jpeg" alt="Linus Torvald" />
+							<small>Linus Torvald, créateur du noyau Linux et de git</small>
+						</div>
+				</section>
+
+				<section data-title="Vos premiers pas avec Git">
+					<h3>II. Vos premiers pas avec Git</h3>
+					<ol class="main">
+						<li>" Par quoi qu'on commenceeeee ? "</li>
+						<li>Les commandes de base</li>
+						<li>Premier enregistrement \o/</li>
+						<li>Les différentes manières d'annuler des changements</li>
+					</ol>
+				</section>
+
+				<section data-subtitle="Par quoi qu'on commenceeeee ?">
+					<h3>Par quoi qu'on commenceeeee ?</h3>
+					<ul>
+						<li class="fragment"><strong>git init</strong> : Initialise le versionnement de vos sources</li>
+						<li class="fragment"><strong>git clone chemin</strong> : Permet de récupérer les sources d'un projet.</li>
+					</ul>
+					<p class="fragment">
+						Du coup, pour le <a href="http://www.youtube.com/watch?v=R7yfISlGLNU">bot</a> :
+						<div class="fragment console medium">
+							git clone https://github.com/Skizzk/GitTutalBot.git
+						</div>
+					</p>
+				</section>
+
+				<section>
+					<h3>Disons à Git qui on est :)</h3>
+					<p>
+						Histoire d'identifier les personnes travaillant sur un projet, git garde en mémoire certains identifiants :
+						<div class="console medium">
+							git config --global user.name "Jean Kulain-Mhouton"<br />
+							git config --global user.email "jean.kulain-mhouton@blackbird.co"
+						</div>
+					</p>
+				</section>
+
+				<section data-subtitle="Les commandes de base">
+					<h3>Les commandes de base</h3>
+					<p>Git maintient à jour un <strong>index des fichiers</strong> : pour cela, toutes les manipulations s'effectuent via git :</p>
+					<ul>
+						<li class="fragment"><strong>git add *</strong> : ajoute tous les fichiers</li>
+						<li class="fragment"><strong>git mv LOL OK</strong> : bouge le fichier LOL en OKI</li>
+						<li class="fragment"><strong>git rm non.wav</strong> : supprime le fichier non.wav</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Suivre l'évolution de nos sources</h3>
+					<p>La commande permettant de suivre l'évolution de notre index est <strong>git status</strong></p>
+					<p>
+						Par exemple, sur notre projet, on obtient ceci :
+						<div class="console medium fragment">
+							$ git status<br />
+							# On branch master<br />
+							nothing to commit, working directory clean
+						</div>
+					</p>
+				</section>
+
+				<section>
+					<h3>... oki ...</h3>
+					<div class="container">
+					<div class="span6">
+						<img src="img/wtf.jpg" alt="WTF?" />
+					</div>
+					<div class="span6" style="padding-top: 60px;">
+						Joli l'index hein ?
+						<div class="console medium">
+							$ git status<br />
+							# On branch master<br />
+							nothing to commit, working directory clean
+						</div>
+						<br />
+						<p class="fragment">Regardons ça de plus près quand même ..</p>
+					</div>
+				</section>
+
+				<section>
+					<h3>Regardons plus en profondeur tout ça</h3>
+					<p>Il y a <strong>3 parties</strong> intéressantes dans un git status :</p>
+					<ul>
+						<li class="fragment">Les fichiers non-trackés</li>
+						<li class="fragment">Les fichiers trackés et modifiés</li>
+						<li class="fragment">Les fichiers ajoutés (ou modifiés) explicitement pour la prochaine validation</li>
+					</ul>
+					<p class="fragment">Sur le rendu d'avant, il n'y a aucun des trois (<img src="img/trollface.jpg" style="height: 30px; vertical-align: middle;" >) :<br /> modifions un peu les sources du projet !</p>
+				</section>
+				<section>
+					<h3>Les fichiers non-trackés</h3>
+					<p>Un nouveau fichier est forcément un fichier non tracké!</p>
+					<div class="console medium">
+						touch seneque
+					</div>
+					On obtient :
+					<div class="console fragment" style="width: 80%; margin:auto;">
+						# On branch master<br />
+						# Untracked files:<br />
+						#   (use "git add <file>..." to include in what will be committed)<br />
+						#<br />
+						#	seneque<br />
+						nothing added to commit but untracked files present (use "git add" to track)
+					</div>
+				</section>
+
+				<section>
+					<h3>Les fichiers trackés et modifiés</h3>
+					<div class="console medium">
+						echo "LOL" >> README.md
+					</div>
+					On obtient :
+					<div class="console fragment" style="width: 70%; margin:auto;">
+						# On branch master<br />
+						# Changes not staged for commit:<br />
+						#   (use "git add <file>..." to update what will be committed)<br />
+						#   (use "git checkout -- <file>..." to discard changes in working directory)<br />
+						#<br />
+						#	modified:   README.md<br />
+						#<br />
+						# Untracked files:<br />
+						#   (use "git add <file>..." to include in what will be committed)<br />
+						#<br />
+						#	seneque<br />
+						no changes added to commit (use "git add" and/or "git commit -a")
+					</div>
+				</section>
+
+				<section>
+					<h3>Les nouveaux fichiers trackés (ou modifiés)</h3>
+					<!-- FIXME: jarter le git mv, ou le faire avec un autre fichier -->
+					<div class="console medium">
+						touch tralala && git add tralala && git mv MOVEME DONTTOUCH 
+					</div>
+					On obtient :
+					<div class="console fragment" style="width: 70%; margin:auto;">
+						# On branch master<br />
+						# Changes to be committed:<br />
+						#   (use "git reset HEAD <file>..." to unstage)<br />
+						#<br />
+						#	renamed:    MOVEME -> DONTTOUCH<br />
+						#	new file:   tralala<br />
+						#<br />
+						# Changes not staged for commit:<br />
+						#   (use "git add <file>..." to update what will be committed)<br />
+						#   (use "git checkout -- <file>..." to discard changes in working directory)<br />
+						#<br />
+						#	modified:   README.md<br />
+						#<br />
+						# Untracked files:<br />
+						#   (use "git add <file>..." to include in what will be committed)<br />
+						#<br />
+						#	seneque
+					</div>
+				</section>
+				
+				<section>
+					<h3>Les différences avec la dernière validation</h3>
+					<p>C'est bien beau de voir les fichiers qui ont changé, mais <strong>quid de ces modifications ?</strong></p>
+					<div class="console medium fragment">
+						git diff
+					</div>
+					<p class="fragment">
+						On obtient :
+						<div class="console medium fragment">
+							diff --git a/README.md b/README.md<br />
+							index bc199a5..1f9e612 100644<br />
+							--- a/README.md<br />
+							+++ b/README.md<br />
+							@@ -1,4 +1,5 @@<br />
+							 GitTutalSlave<br />
+							  =============<br />
+								 <br />
+								 -Slave for git tutorial<br />
+								 \ No newline at end of file<br />
+								 +Slave for git tutorial<br />
+								 +LOL
+						</div>
+					<p>
+				</section>
+
+				<section data-subtitle="Premier enregistrement \o/">
+					<h3>C'est l'heure du ... RE-RE-RE-RECORD!</h3>
+					<p>Après avoir effectué des changements dans notre code, du style :</p>
+					<ul>
+						<li class="fragment">ajouté une fonctionnalité ;</li>
+						<li class="fragment">fixé un bug ;</li>
+						<li class="fragment">corrigé de la typo (LOL) ;</li>
+					</ul>
+					<p class="fragment">On peut <strong>enregistrer</strong> nos modifications à l'aide de la commande:<br /> <strong>git commit</strong></p>
+				</section>
+
+				<section>
+					<h3>Les différentes façons d'effectuer notre commit</h3>
+					<p>
+						Un commit est toujours accompagné d'un <strong>message</strong>.<br />
+						Voici différentes façons d'effectuer notre commit :
+					</p>
+					<ul>
+						<li class="fragment"><strong>git commit</strong> : Ouvre un éditeur pour écrire le message</li>
+						<li class="fragment"><strong>git commit -a</strong> : Ajoute tous les fichiers trackés dans le commit, et ouvre un éditeur</li>
+						<li class="fragment"><strong>git commit -m "SCUMBAG GICLE"</strong> : Commit avec le message "SCUMBAG GICLE"</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Quelques protips <img src="img/deal-with-it.png" alt="Deal with it" style="height: 20px; vertical-align: middle;" /> pour commiter sans soucis</h3>
+					<ul>
+						<li class="fragment">Vérifiez toujours les fichiers que vous validez (git status et git diff sont vos amis)</li>
+						<li class="fragment">Commitez du code <strong>qui fonctionne</strong> (sinon vous allez payer des croissants!)</li>
+					</ul>
+
+					<p class="fragment">
+						Du coup, validons nos <span class="underline">magnifiques</span> changements :
+						<div class="console medium fragment">
+							git commit -m "FIX typo (LOL)"
+						</div>
+					</p>
+				</section>
+
+				<section>
+					<h3>L'historique des commits</h3>
+					<div class="container">
+						<div class="span8" style="margin-top: 50px;">
+							<p>Pour consulter l'historique des enregistrements effectuées,<br /> on utilise <strong>git log</strong></p>
+							<div class="console medium fragment">
+								git log<br />
+								git log -p # Affiche l'historique avec les diff des fichiers<br />
+								git log --name-only # Affiche l'historique avec les fichiers concernés
+							</div>
+						</div>
+						<div class="span4 fragment">
+							Un zôli schéma:
+							<img src="img/git-log.png" alt="Git log" />
+						</div>
+					</div>
+				</section>
+
+				<section data-subtitle="Annuler des changements">
+					<h3>Annuler des changements : les fichiers</h3>
+					<p>Il existe plusieurs façons d'annuler des changements. Pour un fichier :</p>
+					<ul>
+						<li class="fragment">
+							<strong>git checkout file</strong> : Restore le fichier à la dernière version valide<br />
+							<div class="console medium fragment">
+								echo "LOL" > README.md<br />
+								git status<br />
+								git checkout README.md<br />
+								git status
+							</div>
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Annuler des changements : les commits (1/2)</h3>
+					<p>On peut annuler des changements sur des commits entier :</p>
+					<ul>
+						<li class="fragment">
+							<strong>git reset HEAD^</strong> : Annule le dernier commit, sans modifier les fichiers<br />
+							<div class="console medium fragment">
+								echo "LOL" > README.md<br />
+								git status<br />
+								git checkout README.md<br />
+								git status
+							</div>
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h3>HEAD^ ...?</h3>
+					<h3>SRLY LÀ?</h3>
+					<img src="img/dafuq.jpg" alt="DAFUQ?" style="width: 60%;" />
+				</section>
+
+				<section>
+					<h3>Petit explication du HEAD</h3>
+					<div class="container">
+						<div class="span8">
+							<p>Pour faire simple :</p>
+							<ul>
+								<li><strong>HEAD</strong> représente la dernière version valide de vos sources</p></li>
+								<li class="fragment"><strong>HEAD^</strong> représente l'avant dernière version valide</li>
+								<li class="fragment"><strong>HEAD^^</strong> représente l'avant-avant dernière version valide</li>
+								<li class="fragment">Un écriture plus compréhensible : <strong>HEAD~3</strong>, pour remonter 3 commits en arrière.</li>
+							</ul>
+						</div>
+						<div class="span4 fragment">
+							Hey! C'est encore un zôli schéma
+							<img src="img/HEAD.png" alt="DES TÊTES" />
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h3>Annuler des changements : les commits (2/2)</h3>
+
+					<ul>
+						<li><strong>git reset --hard HEAD^</strong> : Supprime le dernier commit, ainsi que les modifications</li>
+						<li><strong>git commit --amend</strong> : Permet de modifier le dernier commit</strong>
+					</ul>
+				</section>
+
+				<section>
+					<h3>Avant de continuer</h3>
+					<div class="container">
+						<div class="span6" style="margin-top: 80px;">
+							<p>Faisons un peu de ménache!</p>
+							<div class="console medium">
+								git reset --hard HEAD^
+							</div>
+							<p>Histoire de supprimer le dernier commit .. douteux ;)</p>
+						</div>
+						<div class="span6 fragment">
+							<img src="img/erase.jpg" alt="ERASE THEM ALL" />
+						</div>
+					</div>
+				</section>
+
+				<section data-title="La gestion des branches">
+					<h3>La gestion des branches</h3>
+					<ol>
+						<li>Intérêts et explications des branches</li>
+						<li>Création des branches</li>
+						<li>Manipulation des branches : le merge</li>
+					</ol>
+				</section>
+
+				<section data-subtitle="Intérêts et explications des branches">
+					<h3>Qu'est-ce qu'une branche ?</h3>
+					<p>Un dessin c'est mieux, m'voyez ..</p>
+					<div class="container">
+						<div class="span6">
+						<img src="img/git-branch.png" />
+						</div>
+						<div class="span6 fragment" style="margin-top: 50px;">
+						<ul>
+							<li>Une <strong>branche</strong> permet de développer en parallèle du code.</li>
+							<li class="fragment">La branche principale (ie par défaut) est la <strong>master</strong></li>
+							<li class="fragment">Dans git, la gestion des branches est optimisée pour être très rapide!</li>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h3>Oki, cool .. à quoi ça sert ?</h3>
+					<p>Les intérêts sont multiples :)</p>
+					<ul>
+						<li class="fragment">A développer de nouvelles fonctionnalités</li>
+						<li class="fragment">A fixer des bugs</li>
+						<li class="fragment">A générer de la documentation</li>
+						<li class="fragment">A effectuer des changements majeurs dans le code</li>
+						<li class="fragment">Et bien plus encore ! (limite, imagination, toussa quoi ..)</li>
+					</ul>
+				</section>
+
+				<section data-subtitle="Création de branches">
+					<h3>Création de branches</h3>
+					<p>Pour <strong>créer</strong> une branche rien de plus simple :</p>
+					<div class="console medium">
+						git branch nom_de_la_branche
+					</div>
+					<br />
+					<p class="fragment">Pour <strong>lister</strong> les branches :</p>
+					<div class="console medium fragment">
+						git branch
+					</div>
+					<br />
+					<p class="fragment">Pour se <strong>déplacer</strong> sur une branche :</p>
+					<div class="console medium fragment">
+						git checkout nom_de_la_branche<br />
+						git branch
+					</div>
+					<br />
+					<p class="fragment">Pour <strong>supprimer</strong> une branche :</p>
+					<div class="console medium fragment">
+						git branch -d nom_de_la_branche<br />
+					</div>
+				</section>
+
+				<section>
+					<h3>Stop bullshits now !</h3>
+					<img src="img/work.jpg" alt="TIME2WORK!" />
+					<p class="fragment">Rendez-vous sur <a href="http://git-tutal.blackbird.co">http://git-tutal.blackbird.co</a> pour choisir une fonctionnalité à coder !</p>
+				</section>
+
+				<section data-subtitle="Manipulation des branches : le merge">
+					<h3>Manipulation des branches : le merge</h3>
+					<p>Lorsque l'on a fini notre travail sur une branche, on veut la fusionner avec la branche principale.</p>
+					<p class="fragment">Ceci est possible grace à un <strong>merge</strong></p>
+					<p class="fragment">La commande a effectuée depuis une branche <span class="underline">b1</span>, pour la merger avec une branche <span class="underline">b2</span> : <strong>git merge b2</strong></p>
+				</section>
+
+				<section>
+					<h3>Un petit schéma ?</h3>
+					<p>Admettons que nous soyons sur la branche <strong>master (M)</strong>, et que l'on veuille merger la branche <strong>feature (F)</strong>:</p>
+					<div class="container">
+						<div class="span6">
+							Avant le merge :
+							<br />
+							<img src="img/git-merge-1.png" alt="Avant le merge" />
+						</div>
+						<div class="span6 fragment">
+							Après le merge :
+							<br />
+							<img src="img/git-merge-2.png" alt="Avant le merge" />
+						</div>
+					</div>
+				</section>
+
+				<section data-title="Gestion des remotes">
+					<h3>Gestion des remotes</h3>
+					<ol>
+						<li>Une remote ? Kezako ?</li>
+						<li>Mise à jour des sources via les remotes</li>
+					</ol>
+				</section>
+
+				<section data-subtitle="Une remote ? Kezako ?">
+					<h3>Une remote ? Kezako ?</h3>
+					<p class="fragment">
+						<img src="img/remote.jpg" alt="Une remote" style="width: 50%;" />
+						<br />
+						De rien :)
+					</p>
+				</section>
+
+				<section>
+					<h3>SRLY, une remote, c'est quoi ?</h3>
+					<ul>
+						<li class="fragment">Une remote est un dépôt</li>
+						<li class="fragment">Votre dépôt est donc une remote!</li>
+						<li class="fragment">Le dépôt que vous avez cloné est aussi une remote : il s'agit de la remote <strong>origin</strong> (GIN)</li>
+					</ul>
+					<div class="console medium fragment">
+						git remote -v
+					</div>
+				</section>
+
+				<section data-subtitle="Mise à jour des sources via les remotes">
+					<h3>Mise à jour des sources via les remotes</h3>
+					<ul>
+						<li class="fragment"><strong>git pull</strong> : Mise à jour de ses sources locales</li>
+						<li class="fragment"><strong>git push</strong> : Mise du dépôt origin avec la branche courante</li>
+					</ul>
+					<img class="fragment" src="img/remote.png" alt="Remotes ftw!" />
+				</section>
+
+				<section>
+					<h3>Un petit exemple pratique sur Github</h3>
+					<p class="fragment">
+						Rendez-vous sur <a href="www.github.com">Github</a> !<br />
+						Inscrivez-vous ou connectez-vous, et crééz un nouveau repo
+					</p>
+					<div class="console fragment medium">
+						git remote add github adresse<br />
+						git push github master
+					</div>
+				</section>
+
+				<section data-title="Aller plus loin">
+					<h3>Aller plus loin</h3>
+					<ul>
+						<li>Une référence : <a href="http://git-scm.com/book/fr">Le Git book</a></li>
+						<li>Une autre référence : <a href="http://www.alexgirard.com/git-book/">Le Git community Book</a>
+					</ul>
+				</section>
+
+				<section>
+					<h1>Merci d'avoir écouté :)</h1>
+					<h3>Des questions ?</h3>
+				</section>
+			</div>
+		</div>
+		<script src="js/jquery-1.9.1.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+		<script src="js/highlight.js"></script>
+		<script src="js/bbird.js"></script>
+	</body>
+</html>

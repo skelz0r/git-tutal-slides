@@ -1,0 +1,26 @@
+/* Common style */
+.underline {
+	text-decoration: underline;
+}
+
+/* Display inline snippets of code */
+pre.inline {
+	display: inline-block;
+	vertical-align: middle;
+	width: auto;
+}
+
+/* Layout aside/section */
+div.container {
+	margin: 0 20px;
+}
+
+div.container div.aside {
+	width: 30%;
+	float: left;
+}
+
+div.container div.section {
+	width: 70%;
+	float: left;
+}
